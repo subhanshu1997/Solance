@@ -1,0 +1,6 @@
+We can accelerate our development by using AI -
+AI can help to write the boilerplate stuff like documentation and JUnit Tets cases which can take developers time. In some cases, it could also help us to generate basic functions by providing swagger. 
+We can also, use AI for troubleshooting bugs.
+On infrastructure side, we can use tools like codedeploy which are intelligent enough to fix minor production errors. Also, we can use eventbridge and cloudwatch to monitor the errors.
+On the frontend side, we can leverage ai to generate different designs implemntation and we can use it as out base to make further changes.
+In conclusion, while coding, we can leaverage a lot AI power which would make out developement faster. 
