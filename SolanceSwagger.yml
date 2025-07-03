@@ -1,0 +1,239 @@
+openapi: 3.0.4
+info:
+  title: Swagger Solance - OpenAPI 3.0
+  version: "1.0"
+  description: Solance swagger
+servers:
+  - url: http://localhost:8080
+paths:
+  /add_user:
+    post:
+      tags:
+        - add_user
+      description: Add new user
+      requestBody:
+        description: User Info
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /create_account:
+    post:
+      description: Create Account
+      requestBody:
+        description: User Info
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAccount'
+        required: true
+      responses:
+        '200':
+          description: Account Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAccount'
+        '400':
+          description: Bad Request
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /deposit_amount:
+    put:
+      description: Deposit Amount
+      requestBody:
+        description: Deposit Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositAmount'
+        required: true
+      responses:
+        '200':
+          description: Account Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAccount'
+        '400':
+          description: Bad Request
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /transfer_amount:
+    post:
+      description: Transfer Amount
+      requestBody:
+        description: Transfer Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferInstruction'
+        required: true
+      responses:
+        '200':
+          description: Account Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAccount'
+        '400':
+          description: Bad Request
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /get_User/userId:
+    get:
+      description: get User'
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    
+ 
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - phone
+        - country
+        - currency
+      properties:
+        userId:
+          type: integer
+          format: int64
+          example: 10
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        phone:
+          type: string
+          example: 353899039472
+        country:
+          type: string
+          example: Ireland
+        currency:
+          type: string
+          example: eur
+        balance:
+          type: number
+          example: 100.00
+        iban:
+          type: string
+          example: IBAN
+    OpenAccount:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+          example: 10
+        balance:
+          type: number
+          example: 100.00
+    DepositAmount:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          format: int64
+          example: 10
+        amount:
+          type: number
+          example: 100.00
+    TransferInstruction:
+      type: object
+      properties:
+        userId:
+            type: integer
+            format: int64
+            example: 10
+        solanceFrom:
+          type: string
+          example: GBP
+        solanceTo:
+          type: string
+          example: GBP
+        timePlaced:
+          type: string
+          example: 24-JAN-18 10:27:44
+        beneficiaryIban:
+          type: string
+          example: IBAN
+        originatingCountry:
+          type: string
+          example: Ireland
+        paymentRef:
+          type: string
+          example: Invoice nr 12345
+        purposeRef:
+          type: string
+          example: invoice payment
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+    
